@@ -10,7 +10,8 @@ import {
 const initial = {
   favs: [],
   current: {
-    activity: "Go to a local thrift shop"
+    activity: "Learn Javascript",
+    key:  "3469378"
   },
   error: null,
   loading: false,
@@ -33,7 +34,11 @@ export function myReducer(state = initial, action) {
       };
 
     case FAV_REMOVE:
-      return state;
+      console.log(action)
+      return {
+        ...state,
+        favs: state.favs.filter( e => e.activity !== action.payload)
+      };
 
     case FETCH_SUCCESS:
       return {
