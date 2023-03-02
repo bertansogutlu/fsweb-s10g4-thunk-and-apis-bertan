@@ -41,7 +41,7 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           {loading && <div className="bg-white p-6 text-center shadow-md">YÜKLENİYOR</div>}
-          {current && <Item/>}
+          {!loading && current && <Item/>}
 
           <div className="flex gap-3 justify-end py-3">
             <button onClick={() => dispatch(fetchAnother())}

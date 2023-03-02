@@ -9,9 +9,11 @@ import {
 
 const initial = {
   favs: [],
-  current: null,
+  current: {
+    activity: "Go to a local thrift shop"
+  },
   error: null,
-  loading: true,
+  loading: false,
 };
 
 function writeFavsToLocalStorage(state) {
