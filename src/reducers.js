@@ -28,10 +28,12 @@ function readFavsFromLocalStorage() {
 export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
-      return {
+      const newState = {
         ...state,
         favs: state.favs.some(e => e.key === state.current.key) ? state.favs : [...state.favs, state.current]
-      };
+      }
+      writeFavsToLocalStorage(newState)
+      return newState;
 
     case FAV_REMOVE:
       console.log(action)
