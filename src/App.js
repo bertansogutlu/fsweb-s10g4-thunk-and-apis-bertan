@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import {fetchAnother} from "./actions";
 import { useSelector } from 'react-redux';
 import { addFav } from './actions'
+import { writeFavsToLocalStorage } from './reducers'
 
 export default function App() {
+  const store = useSelector(depo => depo)
   const loading = useSelector(depo => depo.loading)
   const current = useSelector(depo => depo.current)
   const favs = useSelector(depo => depo.favs)
@@ -16,6 +18,8 @@ export default function App() {
   function addToFavs() {
     dispatch(addFav())
   }
+
+  useEffect(() => {writeFavsToLocalStorage(store)},[store])
 
 
   return (
