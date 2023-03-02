@@ -11,7 +11,7 @@ const initial = {
   favs: [],
   current: {
     activity: "Learn Javascript",
-    key:  "3469378"
+    key: "3469378"
   },
   error: null,
   loading: false,
@@ -27,20 +27,23 @@ function readFavsFromLocalStorage() {
 
 export function myReducer(state = initial, action) {
   switch (action.type) {
-    case FAV_ADD:
+    case FAV_ADD: {
       const newState = {
         ...state,
         favs: state.favs.some(e => e.key === state.current.key) ? state.favs : [...state.favs, state.current]
       }
       writeFavsToLocalStorage(newState)
       return newState;
+    }
 
-    case FAV_REMOVE:
-      console.log(action)
-      return {
+    case FAV_REMOVE: {
+      const newState = {
         ...state,
-        favs: state.favs.filter( e => e.activity !== action.payload)
-      };
+        favs: state.favs.filter(e => e.activity !== action.payload)
+      }
+      writeFavsToLocalStorage(newState)
+      return newState;
+    }
 
     case FETCH_SUCCESS:
       return {
@@ -55,13 +58,16 @@ export function myReducer(state = initial, action) {
       }
 
     case FETCH_ERROR:
-      return  {
+      return {
         ...state,
         current: action.payload
       };
 
     case GET_FAVS_FROM_LS:
-      return state;
+      return {
+        ...state,
+        favs: readFavsFromLocalStorage() ? readFavsFromLocalStorage() : []
+      };
 
     default:
       return state;

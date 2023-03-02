@@ -5,7 +5,8 @@ import FavItem from "./components/FavItem";
 import { useDispatch } from "react-redux";
 import {fetchAnother} from "./actions";
 import { useSelector } from 'react-redux';
-import { addFav } from './actions'
+import { addFav } from './actions';
+import { getFavsFromLocalStorage } from './actions'
 
 export default function App() {
   const loading = useSelector(depo => depo.loading)
@@ -16,6 +17,8 @@ export default function App() {
   function addToFavs() {
     dispatch(addFav())
   }
+
+  useEffect(() => {dispatch(getFavsFromLocalStorage())},[])
 
 
   return (
