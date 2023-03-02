@@ -70,12 +70,14 @@ export default function App() {
               ))
               : <div className="bg-white p-6 text-center shadow-md">Henüz bir favoriniz yok</div>
             }
-            <button
-              onClick={() => dispatch(resetFav())}
-              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
-            >
-              Favorilerimi temizli
-            </button>
+            {
+              favs.length > 0 && <button
+                onClick={() => dispatch(resetFav())}
+                className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+              >
+                Favorilerimi temizli
+              </button>
+            }
           </div>
         </Route>
       </Switch>
