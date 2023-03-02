@@ -5,6 +5,7 @@ import {
   FETCH_LOADING,
   FETCH_ERROR,
   GET_FAVS_FROM_LS,
+  FAVS_RESET,
 } from "./actions";
 
 const initial = {
@@ -69,6 +70,14 @@ export function myReducer(state = initial, action) {
         favs: readFavsFromLocalStorage() ? readFavsFromLocalStorage() : []
       };
 
+      case FAVS_RESET:{
+        const newState = {
+          ...state,
+          favs: []
+        }
+        writeFavsToLocalStorage(newState)
+        return newState;
+      }
     default:
       return state;
   }

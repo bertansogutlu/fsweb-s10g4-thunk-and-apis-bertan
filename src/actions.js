@@ -5,6 +5,7 @@ export const FAV_REMOVE = "FAV_REMOVE";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_LOADING = "FETCH_LOADING";
 export const FETCH_ERROR = "FETCH_ERROR";
+export const FAVS_RESET = "FAVS_RESET";
 
 export const getFavsFromLocalStorage = () => {
   return { type: GET_FAVS_FROM_LS }
@@ -16,6 +17,10 @@ export const addFav = (info) => {
 
 export const removeFav = (id) => {
   return { type: FAV_REMOVE, payload: id }
+}
+
+export const resetFav = (id) => {
+  return { type: FAVS_RESET }
 }
 
 export const fetchAnother = () => dispatch => {

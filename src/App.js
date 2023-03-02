@@ -3,10 +3,11 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
 import { useDispatch } from "react-redux";
-import {fetchAnother} from "./actions";
+import { fetchAnother } from "./actions";
 import { useSelector } from 'react-redux';
 import { addFav } from './actions';
-import { getFavsFromLocalStorage } from './actions'
+import { getFavsFromLocalStorage } from './actions';
+import { resetFav } from "./actions";
 
 export default function App() {
   const loading = useSelector(depo => depo.loading)
@@ -18,7 +19,7 @@ export default function App() {
     dispatch(addFav())
   }
 
-  useEffect(() => {dispatch(getFavsFromLocalStorage())},[])
+  useEffect(() => { dispatch(getFavsFromLocalStorage()) }, [])
 
 
   return (
@@ -44,7 +45,7 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           {loading && <div className="bg-white p-6 text-center shadow-md">YÜKLENİYOR</div>}
-          {!loading && current && <Item/>}
+          {!loading && current && <Item />}
 
           <div className="flex gap-3 justify-end py-3">
             <button onClick={() => dispatch(fetchAnother())}
@@ -69,6 +70,12 @@ export default function App() {
               ))
               : <div className="bg-white p-6 text-center shadow-md">Henüz bir favoriniz yok</div>
             }
+            <button
+              onClick={() => dispatch(resetFav())}
+              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+            >
+              Favorilerimi temizli
+            </button>
           </div>
         </Route>
       </Switch>
